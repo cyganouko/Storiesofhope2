@@ -485,6 +485,43 @@
   margin: 0 auto;      /* centers the container */
   padding: 0 0px;     /* optional side padding */
 }
+
+
+
+    /* ── MOBILE RESPONSIVE ── */
+@media screen and (max-width: 768px) {
+    /* Topbar stacks */
+    .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    /* Hamburger visible */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Nav hidden by default on mobile */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 88px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 24px;
+        gap: 6px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        z-index: 100;
+    }
+
+}
+
+
+
   </style>
 </head>
 <body>
