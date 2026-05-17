@@ -1,10 +1,1144 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+     <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280, initial-scale=1.0">
+  <title>Our Stories – Stories of Hope</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-width: 1280px;
+      font-family: 'Source Sans 3', sans-serif;
+      background: #fff;
+      color: #111;
+        opacity: 0.95;
+      transform: scale(1.25);
+      animation: pagePop 1.8s ease forwards;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION WRAPPER
+    ══════════════════════════════════════ */
+    .page-wrap {
+      width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION TITLES
+    ══════════════════════════════════════ */
+    .section-title {
+      text-align: center;
+      font-family: 'Merriweather', serif;
+      font-size: 34px;
+      font-weight: 900;
+      color: #111;
+      margin-bottom: 40px;
+    }
+
+    .section-title span {
+      color: #1a7a5e;
+    }
+
+    /* ══════════════════════════════════════
+       OUR STORIES
+    ══════════════════════════════════════ */
+    .stories-section {
+      padding: 60px 70px 50px;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 360px);
+      gap: 28px;
+      justify-content: center;
+    }
+
+    .story-card {
+      width: 360px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    .story-card img {
+      width: 360px;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .story-body {
+      padding: 18px 20px 20px;
+    }
+
+    .story-body h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .story-body p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* mini progress inside card */
+    .card-donation-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .card-progress-track {
+      width: 100%;
+      height: 6px;
+      background: #e5e5e5;
+      border-radius: 99px;
+      margin-bottom: 14px;
+    }
+
+    .card-progress-fill {
+      height: 100%;
+      background: #ea984a;
+      border-radius: 99px;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      background: #ea984a;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 99px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif;
+      transition: background 0.2s;
+    }
+
+    .read-more-btn:hover { background: #d4833a; }
+
+    /* dots */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+
+    .dot.active { background: #1a7a5e; }
+
+    /* ══════════════════════════════════════
+       MEET OUR VOLUNTEERS
+    ══════════════════════════════════════ */
+    .volunteers-section {
+      padding: 60px 70px 50px;
+      background: #fff;
+    }
+
+    .volunteers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 340px);
+      gap: 28px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .volunteer-card {
+      width: 340px;
+      text-align: center;
+    }
+
+    .volunteer-card img {
+      width: 340px;
+      height: 340px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px;
+      display: block;
+      margin-bottom: 16px;
+      filter: grayscale(10%);
+    }
+
+    .volunteer-card h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    .volunteer-card .role {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 13px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-icons a:hover {
+      border-color: #1a7a5e;
+      color: #1a7a5e;
+    }
+
+    .view-all-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .view-all-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ea984a;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 99px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif;
+      box-shadow: 0 4px 16px rgba(234,152,74,0.35);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .view-all-btn:hover {
+      background: #d4833a;
+      transform: translateY(-1px);
+    }
+
+    /* ══════════════════════════════════════
+       HELPING EACH OTHER
+    ══════════════════════════════════════ */
+    .helping-section {
+      padding: 60px 70px 70px;
+      background: #f9f9f9;
+    }
+
+    .helping-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 50px;
+    }
+
+    .helping-header h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: #111;
+      line-height: 1.25;
+    }
+
+    .helping-header h2 span {
+      color: #ea984a;
+    }
+
+    .more-about-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ea984a;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 26px;
+      border-radius: 99px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .more-about-btn:hover { background: #d4833a; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 260px);
+      gap: 28px;
+      justify-content: center;
+    }
+
+    .step-card {
+      width: 260px;
+      text-align: center;
+    }
+
+    .step-icon-wrap {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #e8eeec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0;
+      position: relative;
+    }
+
+    .step-icon-wrap i {
+      font-size: 38px;
+      color: #1a7a5e;
+    }
+
+    .step-label {
+      display: inline-block;
+      background: #1a7a5e;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 99px;
+      margin-top: -14px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 14px;
+    }
+
+    .step-card h4 {
+      font-family: 'Merriweather', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+           @keyframes pagePop {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+             /*══════════════════════════════════════ */
+    .hero-section {
+      width: 1280px;
+      height: 660px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Full-bleed background photo with teal overlay */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(14, 100, 90, 0.82) 0%,
+        rgba(14, 100, 90, 0.60) 45%,
+        rgba(14, 100, 90, 0.10) 75%,
+        transparent 100%
+      );
+      z-index: 1;
+    }
+
+    /* ── Left text block ── */
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      width: 520px;
+      margin-left: 68px;
+      color: white;
+    }
+
+    .hero-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-style: italic;
+      color: #ea984a;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .hero-label i {
+      font-size: 18px;
+    }
+
+    .hero-heading {
+      font-family: 'Merriweather', serif;
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .hero-heading .highlight {
+      color: #ea984a;
+      font-style: italic;
+    }
+
+
+    /* ══════════════════════════════════════
+       TOPBAR  — all fixed px
+    ══════════════════════════════════════ */
+    .topbar {
+      width: 1000px;             /* fixed, never fluid */
+      height: 40px;
+      background-color: #238a81;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin-left: 140px;        /* fixed left offset */
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      color: white;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      width: 1000px;             /* matches topbar width */
+    }
+
+    .topbar-contacts {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      white-space: nowrap;       /* prevents wrapping */
+    }
+
+    .topbar-contacts a {
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-family: Arial, sans-serif;
+    }
+
+    .topbar-contacts a:hover { color: #ffcc00; }
+
+    .topbar-social {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-left: auto;         /* push to right */
+    }
+
+    .topbar-social a {
+      color: white;
+      font-size: 15px;
+      text-decoration: none;
+    }
+
+    .topbar-social a:hover { color: #ffcc00; }
+
+    /* ══════════════════════════════════════
+       NAVBAR  — all fixed px
+    ══════════════════════════════════════ */
+    .navbar {
+      width: 1280px;             /* fixed width */
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: white;
+      padding: 0 40px 0 50px;
+    }
+
+    .stories {
+      height: 70px;
+      width: 240px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-shrink: 0;            /* never squish */
+    }
+
+    .nav-links a {
+      color: black;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 5px 15px;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background-color: #0e5149;
+      color: white;
+      border-radius: 4px;
+    }
+
+    .donate-btn {
+      background-color: #ea984a;
+      color: black;
+      font-weight: bold;
+      border-radius: 45px;
+      padding: 12px 20px;
+      width: 130px;
+      text-align: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .donate-btn:hover {
+      background-color: #127e74;
+      color: aqua;
+    }
+
+
+
+
+          .page-container {
+  max-width: 1300px;   /* keeps structure consistent */
+  margin: 0 auto;      /* centers the container */
+  padding: 0 0px;     /* optional side padding */
+}
+
+
+
+
+                  /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    .site-footer {
+      background: #016a69;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    /* ── MAIN ROW ── */
+    .footer-main {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr 1fr;
+      gap: 0;
+      padding: 44px 40px 36px;
+      align-items: start;
+    }
+
+    /* ══ COL 1: BRAND BLOCK ══
+       Logo image on top, org name below, tagline below that.
+       All centered. Vertically starts from the top just like other cols.
+    */
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding-right: 20px;
+    }
+    .footer-logo-wrap {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+    /* ✏️ Replace "your-logo.png" with your actual logo file name.
+       Place the image in the same folder as this HTML file. */
+    .footer-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .footer-brand-name {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      line-height: 1.45;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .footer-brand-tagline {
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.52);
+      letter-spacing: 0.04em;
+    }
+
+    /* ══ SHARED COLUMN STYLES ══ */
+    .footer-col {
+      padding: 0 20px 0 0;
+    }
+    .footer-col h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      margin-top: 0;
+    }
+    .footer-col p {
+      font-size: 0.81rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    /* ══ COL 2: ABOUT US ══ */
+    .footer-col .email-link {
+      display: block;
+      font-size: 0.81rem;
+      color: #e69312;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 16px;
+    }
+    .footer-col .email-link:hover { text-decoration: underline; }
+    .footer-col .hours-label {
+      font-size: 0.81rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .footer-col .hours-text {
+      font-size: 0.81rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    /* ══ COL 3: GET IN TOUCH ══ */
+    .touch-item {
+      margin-bottom: 14px;
+    }
+    .touch-item:last-child { margin-bottom: 0; }
+    .touch-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.81rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .touch-label svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .touch-value {
+      font-size: 0.79rem;
+      color: rgba(255,255,255,0.78);
+      padding-left: 19px;
+      line-height: 1.5;
+    }
+
+    /* ══ COL 4: SUBSCRIBE ══ */
+    .footer-subscribe .sub-desc {
+      font-size: 0.81rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .subscribe-box {
+      background: #005a49;
+      border-radius: 8px;
+      padding: 14px 14px 16px;
+    }
+    .subscribe-box input[type="email"] {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.30);
+      color: #fff;
+      font-size: 0.81rem;
+      font-family: 'Open Sans', sans-serif;
+      padding: 4px 0 7px;
+      outline: none;
+      margin-bottom: 13px;
+    }
+    .subscribe-box input[type="email"]::placeholder {
+      color: rgba(255,255,255,0.48);
+    }
+    .subscribe-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.45;
+      cursor: pointer;
+    }
+    .subscribe-checkbox input[type="checkbox"] {
+      margin-top: 2px;
+      accent-color: #e69312;
+      flex-shrink: 0;
+      width: 13px;
+      height: 13px;
+    }
+
+    /* ══ BOTTOM BAR ══ */
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 40px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-bottom-links {
+      display: flex;
+      gap: 22px;
+    }
+    .footer-bottom-links a {
+      font-size: 0.77rem;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+    }
+    .footer-bottom-links a:hover { color: #fff; }
+
+    .footer-copyright {
+      font-size: 0.77rem;
+      color: rgba(255,255,255,0.78);
+      text-align: center;
+      flex: 1;
+    }
+
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-socials a {
+      width: 30px;
+      height: 30px;
+      background: rgba(255,255,255,0.13);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s;
+      text-decoration: none;
+    }
+    .footer-socials a:hover { background: rgba(255,255,255,0.28); }
+    .footer-socials svg { width: 14px; height: 14px; fill: #fff; }
+
+    @media (max-width: 768px) {
+      .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 16px;
+        padding: 28px 20px 20px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 12px 20px;
+      }
+    }
+    @media (max-width: 480px) {
+      .footer-main { grid-template-columns: 1fr; }
+    }
+
+
+  </style>
 </head>
-<body>
-$END$
+</body>
+
+<div class="page-container">
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-contacts">
+      <a href="mailto:Info@Storiesofhopeinitiative.com" style="margin-right: 30px;">
+        <i class="fa-regular fa-envelope" style="margin-right: 6px;"></i>
+        Info@Storiesofhopeinitiative.Com
+      </a>
+      <a href="tel:+254712345678">
+        <i class="fa-solid fa-phone" style="margin-right: 6px;"></i>
+        +254 712 345 678
+      </a>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- ── NAVBAR ── -->
+<header class="navbar">
+  <img src="{% static 'assets/resources/stories of hope.jpeg' %}" class="stories" alt="Stories of Hope Logo">
+  <nav class="nav-links">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About Us</a>
+    <a href="{% url 'stories' %}">Stories</a>
+    <a href="{% url 'events' %}">Events</a>
+    <a href="{% url 'contact' %}">Contact Us</a>
+    <a href="{% url 'donate' %}" class="donate-btn">Donate Now</a>
+  </nav>
+</header>
+</div>
+
+
+
+<div class="page-wrap">
+
+  <!-- ══════════════════════════════════════
+       OUR STORIES
+  ══════════════════════════════════════ -->
+  <section class="stories-section">
+    <h2 class="section-title">Our <span>Stories</span></h2>
+
+    <div class="stories-grid">
+
+      <!-- Card 1 -->
+      <div class="story-card">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80" alt="Help For Food"/>
+        <div class="story-body">
+          <h3>Help For Food</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          <div class="card-donation-row">
+            <span>Donation</span>
+            <span>20%</span>
+          </div>
+          <div class="card-progress-track">
+            <div class="card-progress-fill" style="width:20%"></div>
+          </div>
+          <div class="card-donation-row" style="margin-bottom:14px;">
+            <span>Raised: 10,000Ksh</span>
+            <span>Goal: 50,000Ksh</span>
+          </div>
+          <button class="read-more-btn">Read More</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="story-card">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=80" alt="Children We Work With"/>
+        <div class="story-body">
+          <h3>Children We Work With</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          <div class="card-donation-row">
+            <span>Donation</span>
+            <span>40%</span>
+          </div>
+          <div class="card-progress-track">
+            <div class="card-progress-fill" style="width:40%"></div>
+          </div>
+          <div class="card-donation-row" style="margin-bottom:14px;">
+            <span>Raised: 20,000Ksh</span>
+            <span>Goal: 50,000Ksh</span>
+          </div>
+          <button class="read-more-btn">Read More</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="story-card">
+        <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&q=80" alt="Help For Education"/>
+        <div class="story-body">
+          <h3>Help For Education</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          <div class="card-donation-row">
+            <span>Donation</span>
+            <span>60%</span>
+          </div>
+          <div class="card-progress-track">
+            <div class="card-progress-fill" style="width:60%"></div>
+          </div>
+          <div class="card-donation-row" style="margin-bottom:14px;">
+            <span>Raised: 30,000Ksh</span>
+            <span>Goal: 50,000Ksh</span>
+          </div>
+          <button class="read-more-btn">Read More</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       MEET OUR VOLUNTEERS
+  ══════════════════════════════════════ -->
+  <section class="volunteers-section">
+    <h2 class="section-title">Meet Our <span>Volunteers</span><br>Members</h2>
+
+    <div class="volunteers-grid">
+
+      <div class="volunteer-card">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Tom Cruise"/>
+        <h3>Tom Cruise</h3>
+        <p class="role">Founder & Chairman</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <div class="volunteer-card">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Emma Watson"/>
+        <h3>Emma Watson</h3>
+        <p class="role">Managing Director</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <div class="volunteer-card">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" alt="Will Smith"/>
+        <h3>Will Smith</h3>
+        <p class="role">Product Designer</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dots" style="margin-bottom:30px;">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="view-all-wrap">
+      <a href="#" class="view-all-btn">View All <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       HELPING EACH OTHER
+  ══════════════════════════════════════ -->
+  <section class="helping-section">
+    <div class="helping-header">
+      <h2>Helping Each Other Can<br>Make <span>World</span> Better</h2>
+      <a href="{% url 'moreaboutus' %}" class="more-about-btn">More About Us <i class="fa-solid fa-arrow-right"></i></a>
+
+    </div>
+
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <div class="step-icon-wrap">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <span class="step-label">Step - 01</span>
+        <h4>Service Selection</h4>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-wrap">
+          <i class="fa-solid fa-file-lines"></i>
+        </div>
+        <span class="step-label">Step - 02</span>
+        <h4>Paves Information</h4>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-wrap">
+          <i class="fa-solid fa-truck"></i>
+        </div>
+        <span class="step-label">Step - 03</span>
+        <h4>Transportation</h4>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-wrap">
+          <i class="fa-solid fa-box-open"></i>
+        </div>
+        <span class="step-label">Step - 04</span>
+        <h4>Takeover Products</h4>
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /page-wrap -->
+
+
+<footer class="site-footer">
+
+  <!-- MAIN COLUMNS -->
+  <div class="footer-main">
+
+    <!-- Col 1: Logo brand block -->
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <!-- ✏️ Replace "your-logo.png" with your actual logo filename -->
+        <img src="{% static 'assets/resources/whitelogo2.png' %}" style="margin-left: 35px" alt="Stories of Hope Initiative Logo"/>
+      </div>
+      <div class="footer-brand-name">Stories of Hope Initiative</div>
+      <div class="footer-brand-tagline">Stories. Impact. Hope.</div>
+    </div>
+
+    <!-- Col 2: About Us -->
+    <div class="footer-col">
+      <h4>About us</h4>
+      <p>We believe it has the power to do amazing things together.</p>
+      <a href="mailto:example@email.com" class="email-link">example@email.com</a>
+      <div class="hours-label">Opening Hours</div>
+      <p class="hours-text">9.30am – 6.30pm<br>Monday to Friday</p>
+    </div>
+
+    <!-- Col 3: Get in Touch -->
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+
+      <div class="touch-item">
+        <div class="touch-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          Address
+        </div>
+        <div class="touch-value">example, first floor, office no.</div>
+      </div>
+
+      <div class="touch-item">
+        <div class="touch-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07
+                     A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.97 1.18
+                     A2 2 0 012.95 1h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81
+                     a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.08-1.08
+                     a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          Phone
+        </div>
+        <div class="touch-value">+254 712 345 678</div>
+      </div>
+
+      <div class="touch-item">
+        <div class="touch-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <polyline points="2,4 12,13 22,4"/>
+          </svg>
+          Email
+        </div>
+        <div class="touch-value">example@email.com</div>
+      </div>
+    </div>
+
+    <!-- Col 4: Subscribe -->
+    <div class="footer-col footer-subscribe">
+      <h4>Subscribe</h4>
+      <p class="sub-desc">We understand that every challenge is an opportunity</p>
+      <div class="subscribe-box">
+        <input type="email" placeholder="Enter Email"/>
+        <label class="subscribe-checkbox">
+          <input type="checkbox"/>
+          I Agree All Your Terms and policies
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Term Of Use</a>
+    </div>
+    <div class="footer-copyright">
+      © 2026 Stories Of Hope Initiative | All Rights Reserved.
+    </div>
+    <div class="footer-socials">
+      <a href="#" aria-label="Facebook">
+        <svg viewBox="0 0 24 24">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+        </svg>
+      </a>
+      <a href="#" aria-label="Twitter">
+        <svg viewBox="0 0 24 24">
+          <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 8v1A10.66
+                   10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0
+                   20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+        </svg>
+      </a>
+      <a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="#fff" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="2"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="#fff"/>
+        </svg>
+      </a>
+      <a href="#" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+</footer>
+
+</head>
+
+
 </body>
 </html>

@@ -1,10 +1,464 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<meta charset="UTF-8">
+<title>Stories of Hope</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<style>
+
+body{
+margin:0px;
+font-family:Arial, sans-serif;
+    font-weight: bold;
+
+}
+
+/* NAVBAR CONTAINER */
+.navbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:20px 20px;
+}
+
+/* LOGO */
+.stories{
+height:70px;     /* adjust logo size here */
+width:240px;
+ margin-left: 50px;
+}
+
+/* NAVIGATION LINKS CONTAINER */
+.nav-links{
+display:flex;
+align-items:center;
+gap:70px;      /* spacing between buttons */
+}
+
+/* NAV LINKS */
+.nav-links a{
+color:black;
+text-decoration:cyan;
+font-size:13px;
+padding:5px 15px;
+}
+
+.nav-links a:hover{
+background-color: #0e5149;
+color:white;
+border-radius:4px;
+}
+
+/* DONATE BUTTON */
+.donate-btn{
+background-color: #ea984a;
+color:black;
+font-weight:bold;
+border-radius:45px;
+padding:30px 20px;
+    width: 130px;
+    text-align: center;
+}
+
+.donate-btn:hover{
+background-color: #127e74;
+    color: aqua;
+}
+
+.topbar {
+    display: flex;
+  width: 90%;
+    justify-content: space-between;/* adjust width as needed */
+  max-width: 1000px;          /* optional max width */
+  background-color: #238a81;
+   border-bottom-left-radius: 20px;   /* round bottom left */
+  border-bottom-right-radius: 20px;  /* round bottom right */
+  border-top-left-radius: 0;         /* keep top left square */
+  border-top-right-radius: 0;       /* rounded corners */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* subtle shadow */
+  padding: 20px;
+    margin-left: 100px;
+    height: 5px;
+    color: white;
+}
+
+.topbar-social{
+     display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.topbar-contacts{
+     text-decoration: none;
+}
+.topbar-social a {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.topbar-social a:hover {
+  color: #ffcc00;                 /* optional hover color */
+}
+ .image-container {
+    /* Set the dimensions of your banner */
+    width: 100%;
+    height: 550px;
+    border-radius: 8px;
+    overflow: hidden;
+
+
+    /* Layer 1: The Linear Gradient (Top) */
+    /* Layer 2: The Background Image (Bottom) */
+    background:
+      linear-gradient(
+        to right,
+        rgba(0, 105, 92, 1) 0%,    /* Solid Dark Green at the start */
+        rgba(0, 105, 92, 0.9) 55%, /* High opacity prolongs the green */
+        rgba(0, 105, 92, 0) 70%    /* Fades to transparent 70% across */
+      ),
+      url('static/assets/resources/homepagepic1.jpeg');
+
+    /* Ensure the image covers the whole area nicely */
+    background-size: cover;
+    background-position: center;
+
+    /* Center any text you might add inside later */
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    color: white;
+    font-family: sans-serif;
+  }
+
+  h1 {
+    max-width: 500px;
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  .text-content{
+
+
+  }
+
+  .button-container {
+  display: flex;              /* put buttons in one line */
+  gap: 20px;                  /* spacing between buttons */
+  margin-left: 40px;          /* push slightly from the left */
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;        /* rounded corners */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;  /* smooth hover effect */
+}
+
+/* Primary button style */
+.primary-btn {
+  background-color: #ea984a;
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: #238a81;
+  color: white;
+}
+
+/* Secondary button style */
+.secondary-btn {
+  background-color: #ea984a;
+  color: black;
+}
+
+.secondary-btn:hover {
+  background-color: #238a81;
+  color: white;
+}
+
+/* Whole page pop-up effect */
+body {
+  opacity: 0;
+  transform: scale(1.25);          /* slightly smaller at start */
+  animation: pagePop 1.8s ease forwards;
+}
+
+@keyframes pagePop {
+  to {
+    opacity: 1;
+    transform: scale(1);           /* zoom to full size */
+  }
+}
+
+.secondary-btn i {
+  margin-left: 8px;   /* space between text and arrow */
+  font-size: 14px;    /* match button text size */
+}
+
+/* Text and arrow */
+.banner-text {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.2;
+    margin-left: 930px;
+}
+
+.banner-arrow {
+  display: block;
+  margin-top: 120px;
+  font-size: 22px;
+  transform: rotate(365deg); /* curve direction */
+}
+
+/* Play button */
+.play-button {
+  position: absolute;
+  right: 10%;
+  top: 40%;
+  background-color: #ea984a;
+  color: white;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-top: 180px;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+  background-color: #127e74;
+}
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f2f2f2;
+}
+
+/* Top image section */
+.hero{
+    height:250px;
+    overflow:hidden;
+}
+
+.hero-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* Progress card */
+.progress-card{
+    width:85%;
+    margin:auto;
+    margin-top:-80px;   /* THIS creates the overlap */
+    background:#ff7a0a;
+    color:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Title */
+.progress-card h2{
+    margin-bottom:20px;
+}
+
+/* Progress bar background */
+.progress-bar{
+    position:relative;
+    height:6px;
+    background:#eee;
+    border-radius:5px;
+}
+
+/* Filled progress */
+.progress{
+    width:60%;
+    height:100%;
+    background:#006d6b;
+    border-radius:5px;
+}
+
+/* Progress circle */
+.progress-dot{
+    position:absolute;
+    left:60%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:18px;
+    height:18px;
+    background:#006d6b;
+    border-radius:50%;
+}
+
+/* Bottom text section */
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    font-size:18px;
+}
+
+.target{
+    text-align:right;
+}
+ .page-container {
+     max-width: 1300px; /* keeps structure consistent */
+     margin: 0 auto; /* centers the container */
+     padding: 0 0px; /* optional side padding */
+ }
+div {
+  border: none;        /* no borders */
+  outline: none;       /* no outlines */
+  background: transparent; /* no background unless you set one */
+}
+</style>
 </head>
+
 <body>
-$END$
+<div class="page-container">
+
+
+ <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-contacts">
+        <a href="mailto:Info@Storiesofhopeinitiative.com" style="color: white; text-decoration: none; margin-left: 35px">
+          <i class="fa-regular fa-envelope"></i>
+          <span style="font-family: Arial;font-size: 12px">Info@Storiesofhopeinitiative.Com</span>
+        </a>
+        <a href="tel:+254712345678" style="text-decoration: none; color: white;font-size: 12px;margin-left: 30px">
+          <i class="fa-solid fa-phone" style="margin-left: 120px"></i>
+          <span>+254 712 345 678  </span>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" style="color: white;margin-left: 400px"></i></a>
+             <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"style="color: white"></i></a>
+             <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"style="color: white"></i></a>
+        </a>
+
+      </div>
+      <div class="topbar-social">
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+<header class="navbar">
+
+<!-- LOGO -->
+<div class="nav-container">
+
+
+<img src="{% static 'assets/resources/stories of hope.jpeg' %}" class="stories" alt="">
+</div>
+<!-- NAVIGATION BUTTONS -->
+<nav class="nav-links">
+
+    <a href="{% url 'home' %}">Home</a>
+
+    <a href="{% url 'about' %}">About Us</a>
+
+    <a href="{% url 'stories' %}">Stories</a>
+
+    <a href="{% url 'events' %}">Events</a>
+
+ <a href="{% url 'contact' %}">Contact Us</a>
+
+
+
+<a href="{% url 'donate' %}" class="donate-btn">Donate Now</a>
+
+</nav>
+</header>
+
+</div>
+
+<div class="image-container">
+    <div class="text-content">
+  <!-- You can place your text here, and it will sit on top of the green -->
+  <h1 style="font-size: 24px;font-weight: bolder">AMPLIFYING REAL STORIES.</h1>
+
+    <h2 style="font-size: 24px;font-weight: bolder"> CREATING MEANINGFUL IMPACT.</h2>
+        <h2 style="font-size: 24px;font-weight: bolder">INSPIRING HOPE FOR A BETTER</h2>
+        <h2 style="font-size: 24px;font-weight: bolder"> TOMORROW.</h2>
+        <h2 style="font-size: 15px"> We document real - life experiences, spark conversations, and take action
+to create stringer more compassionate communities.</h2> <br>
+        <div class="button-container">
+       <a href="{% url 'events' %}" class="btn primary-btn">
+    Our Mission
+</a>
+  <a href="{% url 'stories' %} "class="btn secondary-btn">Get involved <i class="fa-solid fa-arrow-right"></i>
+  </a>
+</div>
+
+    </div>
+
+  <!-- Text + arrow -->
+  <div class="banner-text">
+    <p>Every Story<br><strong>Holds Power</strong></p>
+    <i class="fa-solid fa-arrow-turn-down banner-arrow"></i>
+  </div>
+
+  <!-- Play button -->
+  <div class="play-button">
+    <i class="fa-solid fa-play"></i>
+  </div>
+
+
+</div>
+
+
+
+<div class="progress-card">
+    <h2>Our Stories</h2>
+
+    <div class="progress-bar">
+        <div class="progress"></div>
+        <div class="progress-dot"></div>
+    </div>
+
+    <div class="progress-info">
+        <div>
+            <strong>550</strong><br>
+            Stories Taken
+        </div>
+
+        <div class="target">
+            <strong>10,000</strong><br>
+            Target
+        </div>
+    </div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
 </body>
 </html>
