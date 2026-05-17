@@ -1,0 +1,94 @@
+body{
+    margin:0px;
+    font-family: Arial, sans-serif;
+
+}
+
+/* Navbar */
+.navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 40px;
+    background-color:white;
+}
+
+/* Logo */
+.logo{
+    object-fit: contain;
+    width:1px;   /* adjust size here */
+    opacity: 0.8;
+}
+
+/* Navigation container */
+.nav-links{
+    display:flex;
+    gap:35px;
+}
+
+/* Links */
+.nav-links a{
+    text-decoration:none;
+    color:black;
+    padding:10px;
+}
+
+.nav-links a:hover{
+    background: #0e5149;
+    color:white;
+    border-radius:4px;
+}
+
+/* Donate button */
+.donate-btn{
+    background:yellow;
+    border-radius:20px;
+    padding:10px 20px;
+    font-weight:bold;
+}
+
+.donate-btn:hover{
+    background:gold;
+}
+
+.logo-class{
+    display: none !important;
+}
+
+.button-container {
+  display: flex;              /* put buttons in one line */
+  gap: 20px;                  /* spacing between buttons */
+  margin-left: 40px;          /* push slightly from the left */
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;        /* rounded corners */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;  /* smooth hover effect */
+}
+
+/* Primary button style */
+.primary-btn {
+  background-color: #ea984a;
+  color: black;
+}
+
+.primary-btn:hover {
+  background-color: #127e74;
+  color: white;
+}
+
+/* Secondary button style */
+.secondary-btn {
+  background-color: #238a81;
+  color: white;
+}
+
+.secondary-btn:hover {
+  background-color: #0e5149;
+  color: #ffcc00;
+}
